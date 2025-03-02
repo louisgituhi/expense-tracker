@@ -8,10 +8,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 // icons 
-import { ChevronRight, Receipt, DollarSign, ListFilter, CreditCard } from "lucide-react";
+import { ChevronRight, Receipt, DollarSign, ListFilter, CreditCard, Trash2, Edit } from "lucide-react";
 
 // shad components 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardTitle, CardContent, CardHeader } from "@/components/ui/card";
 import { Form, FormItem, FormLabel, FormControl, FormMessage, FormField } from "@/components/ui/form";
 import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent } from "@/components/ui/select";
@@ -44,15 +45,6 @@ const formSchema = z.object({
   category: z.string().min(1, { message: "Please select a category" }),
   payment_method: z.string().min(1, { message: "Please select a payment method" }),
 })
-
-interface Transaction {
-  id: number
-  category: string
-  trx_amount: number
-  trx_cost: number
-  payment_method: string
-  payment_date: string
-}
 
 type Finance = InstaQLEntity<typeof schema, "expenses">;
 
@@ -96,6 +88,8 @@ function App () {
           <div className="pb-2 px-2 text-gray-400 text-sm">All costs</div>
         </div>
 
+        {/* Expense chart  */}
+        <ExpenseChart />
 
         {/* Expense list */}
         <div className="px-2 pb-20">
@@ -288,6 +282,36 @@ function ExpenseForm({
 // expense list 
 function ExpenseTable({ expenses }: { expenses: Finance[] }) {
 
+  const [selectedRows, setSelectedRows] = useState<string[]>([])
+
+  // Toggle selection of a row
+  const toggleRowSelection = (id: string) => {
+    setSelectedRows((prev) => (prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id]))
+  }
+
+  // Select or deselect all rows
+  const toggleAllRows = () => {
+    if (selectedRows.length === expenses.length) {
+      setSelectedRows([])
+    } else {
+      setSelectedRows(expenses.map((expense) => expense.id))
+    }
+  }
+
+   // Handle delete action
+   const handleDelete = () => {
+    // Implement delete functionality here
+    console.log("Deleting rows:", selectedRows)
+    // After deletion, clear selection
+    setSelectedRows([])
+  }
+
+  // Handle edit action
+  const handleEdit = (id: string) => {
+    // Implement edit functionality here
+    console.log("Editing row:", id)
+  }
+
   // function get method styling
   const getMethodStyle = (payment_method: string) => {
     switch (payment_method.toLowerCase()) {
@@ -352,47 +376,95 @@ function ExpenseTable({ expenses }: { expenses: Finance[] }) {
 
   return (
     <div className="flex items-center justify-between py-3">
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle>Transaction History</CardTitle>
-      </CardHeader>
-      <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="font-semibold text-black text-xs border border-gray-200">Category</TableHead>
-                <TableHead className="font-semibold text-black text-xs border border-gray-200">Trx Amount</TableHead>
-                <TableHead className="font-semibold text-black text-xs border border-gray-200">Trx Cost</TableHead>
-                <TableHead className="font-semibold text-black text-xs border border-gray-200">Method</TableHead>
-                <TableHead className="font-semibold text-black text-xs border border-gray-200">Date</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody className=" text-gray-500 text-xs">
-              {expenses
-                .sort((a,b) => new Date(b.paid_on).getTime() - new Date(a.paid_on).getTime())
-                .map((expense) => (
-                <TableRow key={expense.id}>
-                  <TableCell className=" border border-gray-200">
-                    <span className={`px-2 py-1 rounded-md ${getCategoryStyle(expense.category)}`}>
-                      {expense.category}
-                    </span>
-                  </TableCell>
-                  <TableCell className=" border border-gray-200">{formatCurrency(expense.trx_amount)}</TableCell>
-                  <TableCell className=" border border-gray-200">{formatCurrency(expense.trx_cost)}</TableCell>
-                  <TableCell className=" border border-gray-200">
-                    <span className={`px-2 py-1 rounded-md ${getMethodStyle(expense.payment_method)}`}>
-                      { expense.payment_method}
-                    </span>
-                  </TableCell>
-                  <TableCell className=" border border-gray-200">{formatDate(expense.paid_on)}</TableCell>
+      <Card className="w-full">
+        <div className="flex items-center justify-between">
+          <CardHeader>
+            {selectedRows.length > 0 && (
+              <Button variant="destructive" size="sm" className="flex items-center gap-2" onClick={handleDelete}>
+                <Trash2 className="h-4 w-4" />
+                Delete {selectedRows.length > 1 ? "rows" : "row"}
+              </Button>
+            )}
+          </CardHeader>
+        </div>
+        <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="font-semibold text-black text-xs border border-gray-200 w-12">
+                    <Checkbox
+                      checked={selectedRows.length === expenses.length && expenses.length > 0}
+                      onCheckedChange={toggleAllRows}
+                      aria-label="Select all rows"
+                      className=" rounded-none"
+                    />
+                  </TableHead>
+                  <TableHead className="font-semibold text-black text-xs border border-gray-200">Category</TableHead>
+                  <TableHead className="font-semibold text-black text-xs border border-gray-200">Trx Amount (KSh)</TableHead>
+                  <TableHead className="font-semibold text-black text-xs border border-gray-200">Trx Cost</TableHead>
+                  <TableHead className="font-semibold text-black text-xs border border-gray-200">Method</TableHead>
+                  <TableHead className="font-semibold text-black text-xs border border-gray-200">Date</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-      </CardContent>
-    </Card>
+              </TableHeader>
+              <TableBody className=" text-gray-500 text-xs">
+                { expenses
+                  .sort((a,b) => new Date(b.paid_on).getTime() - new Date(a.paid_on).getTime())
+                  .map((expense) => (
+                  <TableRow key={expense.id} className="group relative">
+                    <TableCell className="border border-gray-200 w-24">
+                      <div className="flex items-center gap-2">
+                        <Checkbox
+                          checked={selectedRows.includes(expense.id)}
+                          onCheckedChange={() => toggleRowSelection(expense.id)}
+                          aria-label={`Select row ${expense.id}`}
+                          className=" rounded-none"
+                        />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8"
+                          onClick={() => handleEdit(expense.id)}
+                        >
+                          <Edit className="h-4 w-4" />
+                          <span className="sr-only">Edit</span>
+                        </Button>
+                      </div>
+                    </TableCell>
+                    <TableCell className=" border border-gray-200">
+                      <span className={`px-2 py-1 rounded-md ${getCategoryStyle(expense.category)}`}>
+                        {expense.category}
+                      </span>
+                    </TableCell>
+                    <TableCell className=" border border-gray-200">{formatCurrency(expense.trx_amount)}</TableCell>
+                    <TableCell className=" border border-gray-200">{formatCurrency(expense.trx_cost)}</TableCell>
+                    <TableCell className=" border border-gray-200">
+                      <span className={`px-2 py-1 rounded-md ${getMethodStyle(expense.payment_method)}`}>
+                        { expense.payment_method}
+                      </span>
+                    </TableCell>
+                    <TableCell className=" border border-gray-200">{formatDate(expense.paid_on)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+        </CardContent>
+      </Card>
     </div>
   )
 }
 
+function ExpenseChart() {
+  return (
+    <div className="flex flex-col gap-4 mt-4 mx-2">
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle className="text-lg font-semibold">Expense Summary</CardTitle>
+        </CardHeader>
+        <CardContent>
+          
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
 export default App;
