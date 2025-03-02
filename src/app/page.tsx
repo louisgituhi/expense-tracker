@@ -382,7 +382,7 @@ function ExpenseTable({ expenses }: { expenses: Finance[] }) {
             {selectedRows.length > 0 && (
               <Button variant="destructive" size="sm" className="flex items-center gap-2" onClick={handleDelete}>
                 <Trash2 className="h-4 w-4" />
-                Delete {selectedRows.length > 1 ? "rows" : "row"}
+                Delete {selectedRows.length > 1 ? "rows" : "row"} ({selectedRows.length})
               </Button>
             )}
           </CardHeader>

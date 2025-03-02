@@ -1946,7 +1946,10 @@ function ExpenseTable({ expenses }) {
                                     columnNumber: 17
                                 }, this),
                                 "Delete ",
-                                selectedRows.length > 1 ? "rows" : "row"
+                                selectedRows.length > 1 ? "rows" : "row",
+                                " (",
+                                selectedRows.length,
+                                ")"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
