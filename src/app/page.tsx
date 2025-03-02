@@ -400,7 +400,7 @@ function ExpenseTable({ expenses }: { expenses: Finance[] }) {
                     />
                   </TableHead>
                   <TableHead className="font-semibold text-black text-xs border border-gray-200">Category</TableHead>
-                  <TableHead className="font-semibold text-black text-xs border border-gray-200">Trx Amount (KSh)</TableHead>
+                  <TableHead className="font-semibold text-black text-xs border border-gray-200">Trx Amount</TableHead>
                   <TableHead className="font-semibold text-black text-xs border border-gray-200">Trx Cost</TableHead>
                   <TableHead className="font-semibold text-black text-xs border border-gray-200">Method</TableHead>
                   <TableHead className="font-semibold text-black text-xs border border-gray-200">Date</TableHead>
