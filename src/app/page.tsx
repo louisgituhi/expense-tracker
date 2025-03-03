@@ -457,8 +457,17 @@ function ExpenseTable({ expenses }: { expenses: Finance[] }) {
 
 function ExpenseChart({ expenses }: { expenses: Finance[] }) {
 
-  const chartData = expenses.map(expense => ({
-    month: "May",
+  // Format date
+  const formatDate = (dateString: string | number) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+  }
+
+  const chartData = expenses.slice(-10).map(expense => ({
+    month: formatDate(expense.paid_on),
     trx_amount: expense.trx_amount,
     trx_cost: expense.trx_cost
   }))
@@ -477,7 +486,7 @@ function ExpenseChart({ expenses }: { expenses: Finance[] }) {
   return (
     <Card className=" mt-4 ">
       <CardHeader>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardDescription>Mar</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
