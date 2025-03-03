@@ -596,6 +596,16 @@ body {
   margin-bottom: .25rem;
 }
 
+.mx-3 {
+  margin-left: .75rem;
+  margin-right: .75rem;
+}
+
+.mx-2 {
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+
 .ml-1 {
   margin-left: .25rem;
 }

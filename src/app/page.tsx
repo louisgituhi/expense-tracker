@@ -484,7 +484,7 @@ function ExpenseChart({ expenses }: { expenses: Finance[] }) {
   } satisfies ChartConfig
 
   return (
-    <Card className=" mt-4 ">
+    <Card className=" mt-4 mx-2">
       <CardHeader>
         <CardDescription>Mar</CardDescription>
       </CardHeader>
