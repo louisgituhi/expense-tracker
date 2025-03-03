@@ -8,17 +8,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 // icons 
-import { ChevronRight, Receipt, DollarSign, ListFilter, CreditCard, Trash2, Edit } from "lucide-react";
+import { ChevronRight, Receipt, DollarSign, ListFilter, CreditCard, Trash2, Edit, TrendingUp } from "lucide-react";
 
 // shad components 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Card, CardTitle, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardTitle, CardContent, CardHeader, CardFooter, CardDescription } from "@/components/ui/card";
 import { Form, FormItem, FormLabel, FormControl, FormMessage, FormField } from "@/components/ui/form";
 import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
 import { Table, TableCell, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
+import { Bar, BarChart,CartesianGrid,Label,XAxis } from "recharts";
+import { type ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 
 // db imports
 import { id, init, i, type InstaQLEntity } from "@instantdb/react";
@@ -89,7 +91,7 @@ function App () {
         </div>
 
         {/* Expense chart  */}
-        <ExpenseChart />
+        <ExpenseChart expenses={ expenses } />
 
         {/* Expense list */}
         <div className="px-2 pb-20">
@@ -453,18 +455,68 @@ function ExpenseTable({ expenses }: { expenses: Finance[] }) {
   )
 }
 
-function ExpenseChart() {
+function ExpenseChart({ expenses }: { expenses: Finance[] }) {
+
+  const chartData = expenses.map(expense => ({
+    month: "May",
+    trx_amount: expense.trx_amount,
+    trx_cost: expense.trx_cost
+  }))
+
+  const chartConfig = {
+    desktop: {
+      label: "trx_amount",
+      color: "hsl(var(--chart-1))",
+    },
+    mobile: {
+      label: "trx_cost",
+      color: "hsl(var(--chart-2))",
+    }
+  } satisfies ChartConfig
+
   return (
-    <div className="flex flex-col gap-4 mt-4 mx-2">
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle className="text-lg font-semibold">Expense Summary</CardTitle>
-        </CardHeader>
-        <CardContent>
-          
-        </CardContent>
-      </Card>
-    </div>
+    <Card className=" mt-4 ">
+      <CardHeader>
+        <CardDescription>January - June 2024</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={chartConfig}>
+          <BarChart accessibilityLayer data={chartData}>
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+            <ChartLegend content={<ChartLegendContent />} />
+            <Bar
+              dataKey="trx_amount"
+              stackId="a"
+              fill="var(--color-trx_amount)"
+              radius={[0, 0, 4, 4]}
+            />
+            <Bar
+              dataKey="trx_cost"
+              stackId="a"
+              fill="var(--color-trx_cost)"
+              radius={[4, 4, 0, 0]}
+            />
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+      {/* <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex gap-2 font-medium leading-none">
+          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Showing total visitors for the last 6 months
+        </div>
+      </CardFooter> */}
+    </Card>
+
   )
 }
 export default App;
