@@ -2195,11 +2195,8 @@ function ExpenseTable({ expenses }) {
             setSelectedRows(expenses.map((expense)=>expense.id));
         }
     };
-    // Handle delete action
     const handleDelete = ()=>{
-        // Implement delete functionality here
         console.log("Deleting rows:", selectedRows);
-        // After deletion, clear selection
         setSelectedRows([]);
     };
     // Handle edit action
@@ -2284,7 +2281,7 @@ function ExpenseTable({ expenses }) {
                                     className: "h-4 w-4"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                    lineNumber: 386,
+                                    lineNumber: 383,
                                     columnNumber: 17
                                 }, this),
                                 "Delete ",
@@ -2295,17 +2292,17 @@ function ExpenseTable({ expenses }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                            lineNumber: 385,
+                            lineNumber: 382,
                             columnNumber: 15
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                        lineNumber: 383,
+                        lineNumber: 380,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                    lineNumber: 382,
+                    lineNumber: 379,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -2315,28 +2312,18 @@ function ExpenseTable({ expenses }) {
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableRow"], {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
-                                            className: "font-semibold text-black text-xs border border-gray-200 w-12",
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$checkbox$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Checkbox"], {
-                                                checked: selectedRows.length === expenses.length && expenses.length > 0,
-                                                onCheckedChange: toggleAllRows,
-                                                "aria-label": "Select all rows",
-                                                className: " rounded-none"
-                                            }, void 0, false, {
-                                                fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                lineNumber: 397,
-                                                columnNumber: 21
-                                            }, this)
+                                            className: "font-semibold text-black text-xs border border-gray-200 w-24"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                            lineNumber: 396,
-                                            columnNumber: 19
+                                            lineNumber: 393,
+                                            columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
                                             className: "font-semibold text-black text-xs border border-gray-200",
                                             children: "Category"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                            lineNumber: 404,
+                                            lineNumber: 395,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -2344,7 +2331,7 @@ function ExpenseTable({ expenses }) {
                                             children: "Trx Amount"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                            lineNumber: 405,
+                                            lineNumber: 396,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -2352,7 +2339,7 @@ function ExpenseTable({ expenses }) {
                                             children: "Trx Cost"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                            lineNumber: 406,
+                                            lineNumber: 397,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -2360,7 +2347,7 @@ function ExpenseTable({ expenses }) {
                                             children: "Method"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                            lineNumber: 407,
+                                            lineNumber: 398,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableHead"], {
@@ -2368,18 +2355,18 @@ function ExpenseTable({ expenses }) {
                                             children: "Date"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                            lineNumber: 408,
+                                            lineNumber: 399,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                    lineNumber: 395,
+                                    lineNumber: 392,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                lineNumber: 394,
+                                lineNumber: 391,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableBody"], {
@@ -2399,10 +2386,11 @@ function ExpenseTable({ expenses }) {
                                                             className: " rounded-none"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                            lineNumber: 418,
+                                                            lineNumber: 409,
                                                             columnNumber: 25
                                                         }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ // After deletion, clear selection
+                                                        ["Button"], {
                                                             variant: "ghost",
                                                             size: "icon",
                                                             className: "opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8",
@@ -2412,7 +2400,7 @@ function ExpenseTable({ expenses }) {
                                                                     className: "h-4 w-4"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                                    lineNumber: 430,
+                                                                    lineNumber: 421,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2420,24 +2408,24 @@ function ExpenseTable({ expenses }) {
                                                                     children: "Edit"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                                    lineNumber: 431,
+                                                                    lineNumber: 422,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                            lineNumber: 424,
+                                                            lineNumber: 415,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                    lineNumber: 417,
+                                                    lineNumber: 408,
                                                     columnNumber: 23
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                lineNumber: 416,
+                                                lineNumber: 407,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -2447,12 +2435,12 @@ function ExpenseTable({ expenses }) {
                                                     children: expense.category
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                    lineNumber: 436,
+                                                    lineNumber: 427,
                                                     columnNumber: 23
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                lineNumber: 435,
+                                                lineNumber: 426,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -2460,7 +2448,7 @@ function ExpenseTable({ expenses }) {
                                                 children: formatCurrency(expense.trx_amount)
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                lineNumber: 440,
+                                                lineNumber: 431,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -2468,7 +2456,7 @@ function ExpenseTable({ expenses }) {
                                                 children: formatCurrency(expense.trx_cost)
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                lineNumber: 441,
+                                                lineNumber: 432,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -2478,12 +2466,12 @@ function ExpenseTable({ expenses }) {
                                                     children: expense.payment_method
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                    lineNumber: 443,
+                                                    lineNumber: 434,
                                                     columnNumber: 23
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                lineNumber: 442,
+                                                lineNumber: 433,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$table$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableCell"], {
@@ -2491,40 +2479,40 @@ function ExpenseTable({ expenses }) {
                                                 children: formatDate(expense.paid_on)
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                                lineNumber: 447,
+                                                lineNumber: 438,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, expense.id, true, {
                                         fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                        lineNumber: 415,
+                                        lineNumber: 406,
                                         columnNumber: 19
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                lineNumber: 411,
+                                lineNumber: 402,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                        lineNumber: 393,
+                        lineNumber: 390,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                    lineNumber: 392,
+                    lineNumber: 389,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-            lineNumber: 381,
+            lineNumber: 378,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-        lineNumber: 380,
+        lineNumber: 377,
         columnNumber: 5
     }, this);
 }
@@ -2562,12 +2550,12 @@ function ExpenseChart({ expenses }) {
                     children: "Mar"
                 }, void 0, false, {
                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                    lineNumber: 489,
+                    lineNumber: 480,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                lineNumber: 488,
+                lineNumber: 479,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -2581,7 +2569,7 @@ function ExpenseChart({ expenses }) {
                                 vertical: false
                             }, void 0, false, {
                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                lineNumber: 494,
+                                lineNumber: 485,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$XAxis$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["XAxis"], {
@@ -2592,7 +2580,7 @@ function ExpenseChart({ expenses }) {
                                 tickFormatter: (value)=>value.slice(0, 3)
                             }, void 0, false, {
                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                lineNumber: 495,
+                                lineNumber: 486,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$chart$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ChartTooltip"], {
@@ -2600,23 +2588,23 @@ function ExpenseChart({ expenses }) {
                                     hideLabel: true
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                    lineNumber: 502,
+                                    lineNumber: 493,
                                     columnNumber: 36
                                 }, void 0)
                             }, void 0, false, {
                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                lineNumber: 502,
+                                lineNumber: 493,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$chart$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ChartLegend"], {
                                 content: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$src$2f$components$2f$ui$2f$chart$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ChartLegendContent"], {}, void 0, false, {
                                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                    lineNumber: 503,
+                                    lineNumber: 494,
                                     columnNumber: 35
                                 }, void 0)
                             }, void 0, false, {
                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                lineNumber: 503,
+                                lineNumber: 494,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$Bar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Bar"], {
@@ -2631,7 +2619,7 @@ function ExpenseChart({ expenses }) {
                                 ]
                             }, void 0, false, {
                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                lineNumber: 504,
+                                lineNumber: 495,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$instant$2d$demo$2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$Bar$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Bar"], {
@@ -2646,29 +2634,29 @@ function ExpenseChart({ expenses }) {
                                 ]
                             }, void 0, false, {
                                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                                lineNumber: 510,
+                                lineNumber: 501,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                        lineNumber: 493,
+                        lineNumber: 484,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                    lineNumber: 492,
+                    lineNumber: 483,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-                lineNumber: 491,
+                lineNumber: 482,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/Documents/instant-demo/src/app/page.tsx",
-        lineNumber: 487,
+        lineNumber: 478,
         columnNumber: 5
     }, this);
 }

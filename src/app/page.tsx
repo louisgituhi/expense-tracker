@@ -300,11 +300,8 @@ function ExpenseTable({ expenses }: { expenses: Finance[] }) {
     }
   }
 
-   // Handle delete action
-   const handleDelete = () => {
-    // Implement delete functionality here
+  const handleDelete = () => {
     console.log("Deleting rows:", selectedRows)
-    // After deletion, clear selection
     setSelectedRows([])
   }
 
@@ -382,7 +379,7 @@ function ExpenseTable({ expenses }: { expenses: Finance[] }) {
         <div className="flex items-center justify-between">
           <CardHeader>
             {selectedRows.length > 0 && (
-              <Button variant="destructive" size="sm" className="flex items-center gap-2" onClick={handleDelete}>
+              <Button variant="destructive" size="sm" className="flex items-center gap-2" onClick={ handleDelete }>
                 <Trash2 className="h-4 w-4" />
                 Delete {selectedRows.length > 1 ? "rows" : "row"} ({selectedRows.length})
               </Button>
@@ -393,14 +390,8 @@ function ExpenseTable({ expenses }: { expenses: Finance[] }) {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="font-semibold text-black text-xs border border-gray-200 w-12">
-                    <Checkbox
-                      checked={selectedRows.length === expenses.length && expenses.length > 0}
-                      onCheckedChange={toggleAllRows}
-                      aria-label="Select all rows"
-                      className=" rounded-none"
-                    />
-                  </TableHead>
+                <TableHead className="font-semibold text-black text-xs border border-gray-200 w-24">
+                </TableHead>
                   <TableHead className="font-semibold text-black text-xs border border-gray-200">Category</TableHead>
                   <TableHead className="font-semibold text-black text-xs border border-gray-200">Trx Amount</TableHead>
                   <TableHead className="font-semibold text-black text-xs border border-gray-200">Trx Cost</TableHead>
@@ -421,7 +412,7 @@ function ExpenseTable({ expenses }: { expenses: Finance[] }) {
                           aria-label={`Select row ${expense.id}`}
                           className=" rounded-none"
                         />
-                        <Button
+                        <Button    // After deletion, clear selection
                           variant="ghost"
                           size="icon"
                           className="opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8"
@@ -516,14 +507,6 @@ function ExpenseChart({ expenses }: { expenses: Finance[] }) {
           </BarChart>
         </ChartContainer>
       </CardContent>
-      {/* <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter> */}
     </Card>
 
   )
