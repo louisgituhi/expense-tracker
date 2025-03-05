@@ -12,8 +12,7 @@ import { ChevronRight, Receipt, DollarSign, ListFilter, CreditCard, Trash2, Edit
 
 // shad components 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Card, CardTitle, CardContent, CardHeader, CardFooter, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardDescription } from "@/components/ui/card";
 import { Form, FormItem, FormLabel, FormControl, FormMessage, FormField } from "@/components/ui/form";
 import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
@@ -25,7 +24,7 @@ import { type ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, Char
 // db imports
 import { id, init, i, type InstaQLEntity } from "@instantdb/react";
 
-// ID for app: finance-app
+// ID for app: expense-app
 const APP_ID = "e1067022-0a5c-472c-a97b-b3caf26ac02d";
 
 // schema declaration 
@@ -48,7 +47,7 @@ const formSchema = z.object({
   payment_method: z.string().min(1, { message: "Please select a payment method" }),
 })
 
-type Finance = InstaQLEntity<typeof schema, "expenses">;
+type Expense = InstaQLEntity<typeof schema, "expenses">;
 
 const db = init({ appId: APP_ID, schema })
 
@@ -103,7 +102,7 @@ function App () {
   )
 }
 
-function FormDialogue({ expenses }: { expenses: Finance[] }) {
+function FormDialogue({ expenses }: { expenses: Expense[] }) {
 
   const [open, setOpen] = useState(false)
 
@@ -127,11 +126,10 @@ function FormDialogue({ expenses }: { expenses: Finance[] }) {
 }
 
 // ui comps
-function ExpenseForm({ 
-  expenses,
+function ExpenseForm({
   onSuccess 
 }: { 
-    expenses: Finance[],
+    expenses: Expense[],
     onSuccess: () => void 
   }) {
 
@@ -282,27 +280,11 @@ function ExpenseForm({
 }
 
 // expense list 
-function ExpenseTable({ expenses }: { expenses: Finance[] }) {
+function ExpenseTable({ expenses }: { expenses: Expense[] }) {
 
-  const [selectedRows, setSelectedRows] = useState<string[]>([])
 
-  // Toggle selection of a row
-  const toggleRowSelection = (id: string) => {
-    setSelectedRows((prev) => (prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id]))
-  }
-
-  // Select or deselect all rows
-  const toggleAllRows = () => {
-    if (selectedRows.length === expenses.length) {
-      setSelectedRows([])
-    } else {
-      setSelectedRows(expenses.map((expense) => expense.id))
-    }
-  }
-
-  const handleDelete = () => {
-    console.log("Deleting rows:", selectedRows)
-    setSelectedRows([])
+  function deleteExpense(expense: Expense) {
+    db.transact(db.tx.expenses[expense.id].delete());
   }
 
   // Handle edit action
@@ -378,12 +360,7 @@ function ExpenseTable({ expenses }: { expenses: Finance[] }) {
       <Card className="w-full">
         <div className="flex items-center justify-between">
           <CardHeader>
-            {selectedRows.length > 0 && (
-              <Button variant="destructive" size="sm" className="flex items-center gap-2" onClick={ handleDelete }>
-                <Trash2 className="h-4 w-4" />
-                Delete {selectedRows.length > 1 ? "rows" : "row"} ({selectedRows.length})
-              </Button>
-            )}
+            Transaction history
           </CardHeader>
         </div>
         <CardContent>
@@ -405,23 +382,23 @@ function ExpenseTable({ expenses }: { expenses: Finance[] }) {
                   .map((expense) => (
                   <TableRow key={expense.id} className="group relative">
                     <TableCell className="border border-gray-200 w-24">
+
                       <div className="flex items-center gap-2">
-                        <Checkbox
-                          checked={selectedRows.includes(expense.id)}
-                          onCheckedChange={() => toggleRowSelection(expense.id)}
-                          aria-label={`Select row ${expense.id}`}
-                          className=" rounded-none"
-                        />
-                        <Button    // After deletion, clear selection
-                          variant="ghost"
+
+                        <Button
+                          variant="outline"
                           size="icon"
-                          className="opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8"
-                          onClick={() => handleEdit(expense.id)}
+                          className="opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 hover:bg-red-200 hover:text-red-500 hover:border-red-500"
+                          onClick={() => deleteExpense(expense)}
                         >
-                          <Edit className="h-4 w-4" />
-                          <span className="sr-only">Edit</span>
+                          <Trash2 className="h-4 w-4" />
+                          <span className="sr-only">Delete</span>
                         </Button>
+
+                        <EditDialogue expenses={[]} />
+
                       </div>
+
                     </TableCell>
                     <TableCell className=" border border-gray-200">
                       <span className={`px-2 py-1 rounded-md ${getCategoryStyle(expense.category)}`}>
@@ -446,7 +423,7 @@ function ExpenseTable({ expenses }: { expenses: Finance[] }) {
   )
 }
 
-function ExpenseChart({ expenses }: { expenses: Finance[] }) {
+function ExpenseChart({ expenses }: { expenses: Expense[] }) {
 
   // Format date
   const formatDate = (dateString: string | number) => {
@@ -508,7 +485,41 @@ function ExpenseChart({ expenses }: { expenses: Finance[] }) {
         </ChartContainer>
       </CardContent>
     </Card>
+  )
+}
 
+function EditDialogue({ expenses }: { expenses: Expense[] }) {
+
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+
+      <DialogTrigger asChild>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          className="opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 hover:bg-blue-200 hover:text-blue-500 hover:border-blue-500"
+        >
+        <Edit className="h-4 w-4" />
+        <span className="sr-only">Edit</span>
+        </Button>
+
+      </DialogTrigger>
+
+      <DialogContent className="sm:max-w-[425px]">
+
+        <DialogHeader>
+          <DialogTitle>Expense</DialogTitle>
+        </DialogHeader>
+
+        <div className="grid gap-4 py-4">
+          <ExpenseForm expenses={ expenses } onSuccess={() => setOpen(false)} />
+        </div>
+
+      </DialogContent>
+    </Dialog>
   )
 }
 export default App;
