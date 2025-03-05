@@ -5,13 +5,10 @@ import ExpenseChart from "@/ui-components/expense-chart";
 import ExpenseTable from "@/ui-components/expense-table";
 import FormDialogue from "@/ui-components/form-dialogue";
 
-// icons 
 import { ChevronRight } from "lucide-react";
 
-// db imports
-import { init, i, type InstaQLEntity } from "@instantdb/react";
+import { init, i } from "@instantdb/react";
 
-// ID for app: expense-app
 const APP_ID = process.env.NEXT_PUBLIC_INSTANT_APP_ID as string;
 
 // schema declaration 
@@ -48,15 +45,19 @@ function App () {
 
         {/* Balance Section */}
         <div className="px-4 pt-2">
+
           <div className="text-xs text-gray-400 flex items-center">
             Total Expenses <ChevronRight className="h-3 w-3 ml-1" />
           </div>
 
           <div className="flex justify-between items-center mt-1 text-rose-500">
+
               <div className="text-3xl font-bold">
                 KSh {expenses.map(expense => expense.trx_amount + expense.trx_cost).reduce((acc, curr) => acc + curr, 0).toFixed(2)}
               </div>
-            <FormDialogue expenses={[]} />
+
+              <FormDialogue expenses={[]} />
+
           </div>
 
         </div>
@@ -68,10 +69,8 @@ function App () {
           <div className="pb-2 px-2 text-gray-400 text-sm">All costs</div>
         </div>
 
-        {/* Expense chart  */}
         <ExpenseChart expenses={ expenses } />
 
-        {/* Expense list */}
         <div className="px-2 pb-20">
           <ExpenseTable expenses={ expenses } />
         </div>
