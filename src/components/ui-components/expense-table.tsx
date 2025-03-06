@@ -102,7 +102,6 @@ function ExpenseTable({ expenses }: { expenses: Expense[] }) {
   
     return (
       <div className="flex items-center justify-between py-3">
-        <div className="bg-red-500">Test</div>
         <Card className="w-full">
           <div className="flex items-center justify-between">
             <CardHeader>
