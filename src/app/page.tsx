@@ -1,9 +1,9 @@
 "use client"
 
 // ui comps
-import ExpenseChart from "@/ui-components/expense-chart";
-import ExpenseTable from "@/ui-components/expense-table";
-import FormDialogue from "@/ui-components/form-dialogue";
+import ExpenseChart from "@/components/ui-components/expense-chart";
+import ExpenseTable from "@/components/ui-components/expense-table";
+import FormDialogue from "@/components/ui-components/form-dialogue";
 
 import { ChevronRight } from "lucide-react";
 
