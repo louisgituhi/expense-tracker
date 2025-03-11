@@ -32,7 +32,7 @@ function ExpenseChart({ expenses }: { expenses: Expense[] }) {
     }
   
     const chartData = expenses.slice(-10).map(expense => ({
-      month: formatDate(expense.paid_on),
+      day: formatDate(expense.paid_on),
       trx_amount: expense.trx_amount,
       trx_cost: expense.trx_cost
     }))
@@ -40,47 +40,80 @@ function ExpenseChart({ expenses }: { expenses: Expense[] }) {
     const chartConfig = {
       desktop: {
         label: "trx_amount",
-        color: "hsl(var(--chart-1))",
+        color: "#FB4700",
       },
       mobile: {
         label: "trx_cost",
-        color: "hsl(var(--chart-2))",
+        color: "#2500FF",
       }
     } satisfies ChartConfig
   
     return (
       <Card className=" mt-4 mx-2">
-        <CardHeader>
-          <CardDescription>Mar</CardDescription>
+
+        <CardHeader className="pb-2">
+          <CardDescription>Month</CardDescription>
         </CardHeader>
-        <CardContent>
-          <ChartContainer config={chartConfig}>
-            <BarChart accessibilityLayer data={chartData}>
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="month"
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-                tickFormatter={(value) => value.slice(0, 3)}
-              />
-              <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-              <ChartLegend content={<ChartLegendContent />} />
-              <Bar
-                dataKey="trx_amount"
-                stackId="a"
-                fill="var(--color-trx_amount)"
-                radius={[0, 0, 4, 4]}
-              />
-              <Bar
-                dataKey="trx_cost"
-                stackId="a"
-                fill="var(--color-trx_cost)"
-                radius={[4, 4, 0, 0]}
-              />
+
+        <CardContent className="pt-0 w-full">
+
+          <ChartContainer config={chartConfig} className="h-[150px] w-full">
+
+            <BarChart 
+              accessibilityLayer 
+              data={chartData} 
+              margin={{ top: 5, right: 5, bottom: 5, left: 5 }}
+              width={500}
+              height={150}
+              barGap={6}
+              barCategoryGap={20}
+            >
+
+            <CartesianGrid vertical={false} />
+
+            <XAxis
+              dataKey="day"
+              tickLine={false}
+              tickMargin={5}
+              axisLine={false}
+              tickFormatter={(value) => value.slice(0, 6)}
+              height={ 20 }
+            />
+
+            <ChartTooltip 
+              content={<ChartTooltipContent hideLabel />} 
+            />
+
+            <ChartLegend 
+              content={<ChartLegendContent />} 
+              verticalAlign="top" 
+              height={20} 
+            />
+
+            <Bar
+              dataKey="trx_amount"
+              name="amount"
+              stackId="a"
+              fill="#FB4700"
+              radius={[0, 0, 4, 4]}
+              barSize={35}
+            />
+
+            <Bar
+              dataKey="trx_cost"
+              name="cost"
+              stackId="a"
+              fill="#2500FF"
+              radius={[4, 4, 0, 0]}
+              barSize={35}
+            />
+
             </BarChart>
+
           </ChartContainer>
+
         </CardContent>
+
       </Card>
     )
   }
