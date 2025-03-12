@@ -1,11 +1,7 @@
 "use client"
 
-// ui comps
-import ExpenseChart from "@/components/ui-components/expense-chart";
 import ExpenseTable from "@/components/ui-components/expense-table";
-import FormDialogue from "@/components/ui-components/form-dialogue";
-
-import { ChevronRight } from "lucide-react";
+import ExpenditureCard from "@/components/ui-components/expenditure-card";
 
 import { init, i } from "@instantdb/react";
 
@@ -43,39 +39,14 @@ function App () {
   
       <div className="w-full overflow-hidden rounded-3xl text-black shadow-xl">
 
-        {/* Balance Section */}
         <div className="px-4 pt-2">
 
-          <div className="text-xs text-gray-400 flex items-center">
-            Total Expenses <ChevronRight className="h-3 w-3 ml-1" />
-          </div>
+              <ExpenditureCard expenses={ expenses } />
 
-          <div className="flex justify-between items-center mt-1 text-rose-500">
-
-              <div className="text-3xl font-bold">
-                KSh {expenses.map(expense => expense.trx_amount + expense.trx_cost).reduce((acc, curr) => acc + curr, 0).toFixed(2)}
-              </div>
-
-              <FormDialogue expenses={[]} />
-
-          </div>
-
-        </div>
-            
-
-        {/* Tabs */}
-        <div className="flex mt-4 px-4 border-b border-gray-800">
-          <div className="pb-2 px-2 border-b-2 border-white font-medium text-sm">All Exps</div>
-          <div className="pb-2 px-2 text-gray-400 text-sm">All costs</div>
-        </div>
-
-        <ExpenseChart expenses={ expenses } />
-
-        <div className="px-2 pb-20">
-          <ExpenseTable expenses={ expenses } />
         </div>
 
       </div>
+      
     </div>
   )
 }

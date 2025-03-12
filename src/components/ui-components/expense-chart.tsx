@@ -49,7 +49,7 @@ function ExpenseChart({ expenses }: { expenses: Expense[] }) {
     } satisfies ChartConfig
   
     return (
-      <Card className=" mt-4 mx-2">
+      <Card className=" mt-4 mx-2 mb-4">
 
         <CardHeader className="pb-2">
           <CardDescription>Month</CardDescription>
