@@ -1,9 +1,7 @@
 "use client"
 
 import { Utensils, Home, Lightbulb, Car, Film, Heart, ShoppingBag, Plane, Shirt, FileX, PhoneCall, Scissors, Popcorn } from "lucide-react";
-
-import { i, InstaQLEntity, init } from "@instantdb/react";
-
+import { i, type InstaQLEntity, init } from "@instantdb/react";
 // ID for app: expense-app
 const APP_ID = process.env.NEXT_PUBLIC_INSTANT_APP_ID as string;
 
@@ -101,6 +99,7 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
                       height="12" 
                       x="2" y="6" rx="2"
                     />
+                    <title>svg</title>
                     <circle 
                       cx="12" 
                       cy="12" 
@@ -135,6 +134,7 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
+                        <title>svg</title>
                         </svg>
 
               </div>
@@ -165,7 +165,12 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
                   <div className="flex items-center">
                     <span className="font-medium mr-2">{formatCurrency(totalAmount)}</span>
                     {/* Arrow Icon */}
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg 
+                      width="16" 
+                      height="16" 
+                      viewBox="0 0 24 24" 
+                      fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <title>svg</title>
                       <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>

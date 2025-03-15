@@ -84,6 +84,7 @@ export default function ExpenseCard({ expenses }: { expenses: Expense[] }) {
           strokeLinecap="round" 
           strokeLinejoin="round" 
           className="lucide lucide-snowflake">
+          <title>svg</title>
           <path d="m10 20-1.25-2.5L6 18"/>
           <path d="M10 4 8.75 6.5 6 6"/>
           <path d="m14 20 1.25-2.5L18 18"/>
@@ -106,25 +107,30 @@ export default function ExpenseCard({ expenses }: { expenses: Expense[] }) {
 
         <CardHeader className="flex flex-row items-center justify-between pb-2">
 
-          <div className="flex items-center">
+          <div className="flex items-center gap-1">
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="mr-2 text-green-300"
-            >
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-            </svg>
-            <span className="font-medium">Activity</span>
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="#36ec97" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="lucide lucide-chart-spline">
+            <title>svg</title>
+            <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
+            <path d="M7 16c.5-2 1.5-7 4-7 2 0 2 3 4 3 2.5 0 4.5-5 5-7"/>
+          </svg>
+
+            <span className="font-medium ">Todays expenses</span>
+
           </div>
+
           <span className="text-sm text-muted-foreground">{ today }</span>
+
         </CardHeader>
 
           <CardContent className="flex flex-row items-center justify-between pb-2">
