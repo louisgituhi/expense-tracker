@@ -84,19 +84,31 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
                 <div className="flex items-center gap-3">
 
                     <div className="p-2 bg-red-100 text-red-600 rounded-full">
-                        {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-                        <svg 
-                            width="16" 
-                            height="16" 
-                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M18 6L6 18M6 6L18 18"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
+
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      width="24" 
+                      height="24" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="#FF355E" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      className="lucide lucide-banknote">
+                    <rect 
+                      width="20" 
+                      height="12" 
+                      x="2" y="6" rx="2"
+                    />
+                    <circle 
+                      cx="12" 
+                      cy="12" 
+                      r="2"
+                    />
+                  <path d="M6 12h.01M18 12h.01"/>
+            </svg>
+
                     </div>
 
                     <div>

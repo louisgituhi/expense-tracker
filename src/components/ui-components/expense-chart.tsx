@@ -94,7 +94,7 @@ function ExpenseChart({ expenses }: { expenses: Expense[] }) {
               dataKey="trx_amount"
               name="amount"
               stackId="a"
-              fill="#FB4700"
+              fill="#adfa1d"
               radius={[0, 0, 4, 4]}
               barSize={35}
             />
@@ -103,7 +103,7 @@ function ExpenseChart({ expenses }: { expenses: Expense[] }) {
               dataKey="trx_cost"
               name="cost"
               stackId="a"
-              fill="#2500FF"
+              fill="#FB4700"
               radius={[4, 4, 0, 0]}
               barSize={35}
             />
