@@ -112,7 +112,7 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
 
                     <div>
                         <p className="font-medium">Money spent</p>
-                        <p className="text-xs text-muted-foreground">{ expenses.length }</p>
+                        <p className="text-xs text-muted-foreground">{ expenses.length } transactions</p>
                     </div>
 
                 </div>
@@ -164,7 +164,6 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
 
                   <div className="flex items-center">
                     <span className="font-medium mr-2">{formatCurrency(totalAmount)}</span>
-                    {/* Arrow Icon */}
                     <svg 
                       width="16" 
                       height="16" 
