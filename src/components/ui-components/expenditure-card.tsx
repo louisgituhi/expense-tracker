@@ -28,8 +28,13 @@ const db = init({ appId: APP_ID, schema })
 
 export default function ExpenseCard({ expenses }: { expenses: Expense[] }) {
 
+  const totalAmount = expenses.reduce((acc, expense) => acc + expense.trx_amount, 0)
+  const totalCost = expenses.reduce((acc, cost) => acc + cost.trx_cost, 0)
+
   return (
+
     <div className="w-full max-w-3xl mx-auto px-4">
+
       <div className="flex items-center justify-between mb-4">
         {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
         <svg 
@@ -81,11 +86,18 @@ export default function ExpenseCard({ expenses }: { expenses: Expense[] }) {
             </svg>
             <span className="font-medium">Activity</span>
           </div>
-          <span className="text-sm text-muted-foreground">February 2025</span>
+          {/* <span className="text-sm text-muted-foreground">February 2025</span> */}
         </CardHeader>
-        <CardContent className="pb-2">
-          <h3 className="text-xl font-bold text-red-500">KSh 30388.00</h3>
-        </CardContent>
+
+          <CardContent className="pb-2">
+
+            <span className=" text-lg font-semibold flex items-center gap-2 text-gray-400">
+              <h3 className=" text-red-500">Ksh { totalAmount }</h3>
+              ||
+              <h3 className=" text-[#0F0E47]">{ totalCost }</h3>
+            </span>
+
+          </CardContent>
       </Card>
 
       <NavigationTab expenses={ expenses } />

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs"
 import ExpenditureList from "./expenditure-list"
 import ExpenseChart from "./expense-chart"
+import ExpenseTable from "./expense-table"
 
 import { init, i, type InstaQLEntity } from "@instantdb/react";
 
@@ -40,7 +41,7 @@ export default function NavigationTab({ expenses }: { expenses: Expense[] } ) {
                         Summary
                     </TabsTrigger>
 
-                    <TabsTrigger value="expense-table" className="px-4">
+                    <TabsTrigger value="expense-chart" className="px-4">
                         All Expenses
                     </TabsTrigger>
 
@@ -49,11 +50,12 @@ export default function NavigationTab({ expenses }: { expenses: Expense[] } ) {
             </div>
 
                 <TabsContent value="summary" className="mt-4">
-                    <ExpenditureList />
+                    <ExpenditureList expenses={ expenses } />
                 </TabsContent>
 
-                <TabsContent value="expense-table" className="mt-4">
+                <TabsContent value="expense-chart" className="mt-4">
                     <ExpenseChart expenses={ expenses } />
+                    {/* <ExpenseTable expenses={ expenses } /> */}
                 </TabsContent>
 
         </Tabs>

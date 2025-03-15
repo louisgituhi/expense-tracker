@@ -1,9 +1,84 @@
 "use client"
 
-export default function ExpenditureList() {
+import { Utensils, Home, Lightbulb, Car, Film, Heart, ShoppingBag, Plane, Shirt, FileX, PhoneCall, Scissors, Popcorn } from "lucide-react";
+
+import { i, InstaQLEntity, init } from "@instantdb/react";
+
+// ID for app: expense-app
+const APP_ID = process.env.NEXT_PUBLIC_INSTANT_APP_ID as string;
+
+const schema = i.schema({
+  entities: {
+    expenses: i.entity({
+      trx_amount: i.number(),
+      trx_cost: i.number(),
+      category: i.string(),
+      payment_method: i.string(),
+      paid_on: i.number(),
+    })
+  }
+});
+
+type Expense = InstaQLEntity<typeof schema, "expenses">;
+
+const db = init({ appId: APP_ID, schema })
+
+const groupExpensesByCategory = (expenses: Expense[]) => {
+  return expenses.reduce((acc, expense) => {
+    if (!acc[expense.category]) {
+      acc[expense.category] = { totalAmount: 0, count: 0 };
+    }
+    acc[expense.category].totalAmount += expense.trx_amount;
+    acc[expense.category].count += 1;
+    return acc;
+  }, {} as Record<string, { totalAmount: number; count: number }>);
+};
+
+const getCategoryStyle = (category: string) => {
+  switch (category.toLowerCase()) {
+    case "food":
+      return { style: "bg-orange-100 text-orange-500", icon: <Utensils className="w-4 h-4" /> };
+    case "housing":
+      return { style: "bg-cyan-100 text-cyan-500", icon: <Home className="w-4 h-4" /> };
+    case "utilities":
+      return { style: "bg-yellow-100 text-yellow-500", icon: <Lightbulb className="w-4 h-4" /> };
+    case "transport":
+      return { style: "bg-blue-100 text-blue-500", icon: <Car className="w-4 h-4" /> };
+    case "entertainment":
+      return { style: "bg-[#F0FFF0] text-[#90FCCF]", icon: <Film className="w-4 h-4" /> };
+    case "healthcare":
+      return { style: "bg-green-100 text-green-500", icon: <Heart className="w-4 h-4" /> };
+    case "shopping":
+      return { style: "bg-pink-100 text-pink-500", icon: <ShoppingBag className="w-4 h-4" /> };
+    case "airtime": 
+      return { style: "bg-[#FD7F5E] text-[#FC2011]", icon: <PhoneCall className="w-4 h-4" /> };
+    case "haircut": 
+      return { style: "bg-[#ED80E9] text-[#4F2B4E]", icon: <Scissors className="w-4 h-4" /> };
+    case "groceries": 
+      return { style: "bg-[#FFA3DD] text-[#FD3DB5]", icon: <Popcorn className="w-4 h-4" /> };
+    case "clothing":
+      return { style: "bg-purple-100 text-purple-500", icon: <Shirt className="w-4 h-4" /> };
+    default:
+      return { style: "bg-gray-100 text-gray-500", icon: <FileX className="w-4 h-4" /> }; // Default icon
+  }
+};    
+
+  // Format currency
+const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "KSh"
+    }).format(amount)
+}
+
+
+export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
+
+  const groupedExpenses = groupExpensesByCategory(expenses);
+
     return (
         <div className="space-y-3 mb-6">
-            
+
             <div className="flex items-center justify-between p-3 rounded-lg border">
 
                 <div className="flex items-center gap-3">
@@ -25,17 +100,16 @@ export default function ExpenditureList() {
                     </div>
 
                     <div>
-                        <p className="font-medium">Money out</p>
-                        <p className="text-xs text-muted-foreground">11 transactions</p>
+                        <p className="font-medium">Money spent</p>
+                        <p className="text-xs text-muted-foreground">{ expenses.length }</p>
                     </div>
 
                 </div>
 
                 <div className="flex items-center">
 
-                    <span className="font-medium mr-2">$464.89</span>
+                    <span className="font-medium mr-2">{formatCurrency(expenses.reduce((sum, expense) => sum + expense.trx_amount, 0))}</span>
 
-                      {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
                         <svg 
                             width="16" 
                             height="16" 
@@ -51,224 +125,42 @@ export default function ExpenditureList() {
                         />
                         </svg>
 
-                </div>
+              </div>
 
             </div>
 
-            {/* Groceries item */}
-            <div className="flex items-center justify-between p-3 rounded-lg border">
+            { Object.entries(groupedExpenses).map(([category, { totalAmount, count }]) => {
 
-                <div className="flex items-center gap-3">
+              const { style, icon } = getCategoryStyle(category);
 
-                    <div className="p-2 bg-green-100 text-green-600 rounded-full">
+              return (
 
-                        {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-                        <svg 
-                            width="16" 
-                            height="16" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M3 6H21M3 12H21M3 18H21"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                        </svg>
+                <div key={category} className="flex items-center justify-between p-3 rounded-lg border">
 
+                  <div className="flex items-center gap-3">
+
+                    <div className={`p-2 rounded-full ${style}`}>
+                      {icon}
                     </div>
 
                     <div>
-                        <p className="font-medium">Groceries</p>
-                        <p className="text-xs text-muted-foreground">5 transactions</p>
+                      <p className="font-medium">{category}</p>
+                      <p className="text-xs text-muted-foreground">{count} transactions</p>
                     </div>
 
-                </div>
+                  </div>
 
-                <div className="flex items-center">
-
-                    <span className="font-medium mr-2">$269.27</span>
-
-                      {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-                        <svg 
-                            width="16" 
-                            height="16" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M9 18L15 12L9 6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        </svg>
-
-                </div>
-
-            </div>
-
-                  {/* Electronics item */}
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-
-                <div className="flex items-center gap-3">
-
-                    <div className="p-2 bg-blue-100 text-blue-600 rounded-full">
-
-                        {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-                        <svg 
-                            width="16" 
-                            height="16" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            xmlns="http://www.w3.org/2000/svg">
-                          <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="2" />
-                          <path d="M8 16H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                        </svg>
-
-                    </div>
-
-                    <div>
-                        <p className="font-medium">Electronics</p>
-                        <p className="text-xs text-muted-foreground">2 transactions</p>
-                    </div>
-
-                </div>
-
-                <div className="flex items-center">
-
-                    <span className="font-medium mr-2">$143.91</span>
-                      
-                      {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-                        <svg 
-                            width="16" 
-                            height="16" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M9 18L15 12L9 6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        </svg>
-
-                </div>
-
-            </div>
-
-                  {/* Transportation item */}
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-
-                <div className="flex items-center gap-3">
-
-                    <div className="p-2 bg-amber-100 text-amber-600 rounded-full">
-
-                        {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-                        <svg 
-                            width="16" 
-                            height="16" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            xmlns="http://www.w3.org/2000/svg">
-                          <path d="M5 11L5 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                          <path d="M19 11L19 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                          <rect x="3" y="8" width="18" height="4" rx="1" stroke="currentColor" strokeWidth="2" />
-                          <path d="M7 18H17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                        </svg>
-
-                    </div>
-
-                    <div>
-                        <p className="font-medium">Transportation</p>
-                        <p className="text-xs text-muted-foreground">2 transactions</p>
-                    </div>
-
-                </div>
-                    
-                <div className="flex items-center">
-
-                    <span className="font-medium mr-2">$243.91</span>
-
-                      {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-                    <svg 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M9 18L15 12L9 6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
+                  <div className="flex items-center">
+                    <span className="font-medium mr-2">{formatCurrency(totalAmount)}</span>
+                    {/* Arrow Icon */}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-
+                  </div>
                 </div>
-
-            </div>
-
-                  {/* Rent item */}
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-
-                <div className="flex items-center gap-3">
-
-                    <div className="p-2 bg-purple-100 text-purple-600 rounded-full">
-
-                        {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-                        <svg 
-                            width="16" 
-                            height="16" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M3 10.5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V10.5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          />
-                          <path d="M12 3L22 10.5H2L12 3Z" stroke="currentColor" strokeWidth="2" />
-                        </svg>
-
-                    </div>
-
-                    <div>
-                        <p className="font-medium">Rent</p>
-                        <p className="text-xs text-muted-foreground">1 transaction</p>
-                    </div>
-
-                </div>
-
-                <div className="flex items-center">
-
-                    <span className="font-medium mr-2">$523.91</span>
-                        {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-                        <svg 
-                            width="16" 
-                            height="16" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M9 18L15 12L9 6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        </svg>
-
-                </div>
-
-            </div>
+              );
+            })}
 
         </div>
-    )
-}
+      )
+    }

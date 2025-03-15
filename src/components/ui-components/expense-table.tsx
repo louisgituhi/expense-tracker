@@ -61,25 +61,29 @@ function ExpenseTable({ expenses }: { expenses: Expense[] }) {
     const getCategoryStyle = (category: string) => {
       switch (category.toLowerCase()) {
         case "food":
-          return "bg-orange-100 text-orange-500"
+          return  "bg-orange-100 text-orange-500";
         case "housing":
-          return "bg-cyan-100 text-cyan-500"
+          return  "bg-cyan-100 text-cyan-500";
         case "utilities":
-          return "bg-yellow-100 text-yellow-500"
+          return  "bg-yellow-100 text-yellow-500";
         case "transport":
-          return "bg-blue-100 text-blue-500"
+          return  "bg-blue-100 text-blue-500";
         case "entertainment":
-          return "bg-purple-100 text-purple-500"
+          return  "bg-[#F0FFF0] text-[#90FCCF]";
         case "healthcare":
-          return "bg-green-100 text-green-500"
+          return  "bg-green-100 text-green-500";
         case "shopping":
-          return "bg-pink-100 text-pink-500"
-        case "holiday":
-          return "bg-teal-100 text-teal-500"
+          return  "bg-pink-100 text-pink-500";
+        case "airtime": 
+          return  "bg-[#FD5E53] text-[#E2544A]";
+        case "haircut": 
+          return  "bg-[#ED80E9] text-[#4F2B4E]";
+        case "groceries": 
+          return  "bg-[#FFA3DD] text-[#FD3DB5]";
         case "clothing":
-          return "bg-purple-100 text-purple-500"
+          return  "bg-purple-100 text-purple-500";
         default:
-          return "bg-gray-100 text-gray-500"
+          return  "bg-gray-100 text-gray-500";
       }
     }
   
@@ -121,6 +125,7 @@ function ExpenseTable({ expenses }: { expenses: Expense[] }) {
                     <TableHead className="font-semibold text-black text-xs border border-gray-200">Date</TableHead>
                   </TableRow>
                 </TableHeader>
+                
                 <TableBody className=" text-gray-500 text-xs">
                   { expenses
                     .sort((a,b) => new Date(b.paid_on).getTime() - new Date(a.paid_on).getTime())

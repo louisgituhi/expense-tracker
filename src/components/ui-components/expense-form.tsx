@@ -140,14 +140,15 @@ function ExpenseForm({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="food">Food & Dining</SelectItem>
+                      <SelectItem value="airtime">Airtime</SelectItem>
+                      <SelectItem value="food">Food/Snack/Groceries</SelectItem>
+                      <SelectItem value="haircut">Haircut</SelectItem>
                       <SelectItem value="transport">Transport</SelectItem>
                       <SelectItem value="utilities">Utilities</SelectItem>
                       <SelectItem value="entertainment">Entertainment</SelectItem>
                       <SelectItem value="shopping">Shopping</SelectItem>
                       <SelectItem value="housing">Housing</SelectItem>
                       <SelectItem value="healthcare">Healthcare</SelectItem>
-                      <SelectItem value="holiday">Holiday</SelectItem>
                       <SelectItem value="clothing">Clothing</SelectItem>
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
