@@ -1,5 +1,6 @@
 "use client"
 
+import { ArrowUp, ArrowDown } from "lucide-react";
 import FormDialogue from "./form-dialogue"
 import NavigationTab from "./navigation-tabs"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
@@ -26,17 +27,52 @@ type Expense = InstaQLEntity<typeof schema, "expenses">;
 
 const db = init({ appId: APP_ID, schema })
 
+const formatDate = (dateString: string | number) => {
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })
+}
+
+const getYesterdayDate = () => {
+  const yesterday = new Date()
+  yesterday.setDate(yesterday.getDate() - 1)
+  return formatDate(yesterday.getTime())
+}
+
 export default function ExpenseCard({ expenses }: { expenses: Expense[] }) {
 
-  const totalAmount = expenses.reduce((acc, expense) => acc + expense.trx_amount, 0)
-  const totalCost = expenses.reduce((acc, cost) => acc + cost.trx_cost, 0)
+  const today = formatDate(Date.now());
+  const yesterday = getYesterdayDate()
+
+  const todaysExpenses = expenses.filter((expense) => formatDate(expense.paid_on) === today)
+  const yesterdaysExpenses = expenses.filter((expense) => formatDate(expense.paid_on) === yesterday)
+
+  const todaysTotal = todaysExpenses.reduce((acc, expense) => acc + expense.trx_amount, 0)
+  const yesterdaysTotal = yesterdaysExpenses.reduce((acc, expense) => acc + expense.trx_amount, 0)
+
+  const todaysCost = todaysExpenses.reduce((acc, expense) => acc + expense.trx_cost, 0)
+
+  // Calculate percentage difference
+  let percentageDiff = 0
+  let isIncrease = false
+
+  if (yesterdaysTotal > 0) {
+    percentageDiff = Math.abs(((todaysTotal - yesterdaysTotal) / yesterdaysTotal) * 100)
+    isIncrease = todaysTotal > yesterdaysTotal
+  } else if (todaysTotal > 0) {
+    // If yesterday was 0 but today has expenses, it's a 100% increase
+    percentageDiff = 100
+    isIncrease = true
+  }
 
   return (
 
     <div className="w-full max-w-3xl mx-auto px-4">
 
       <div className="flex items-center justify-between mb-4">
-        {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+       
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           width="24" 
@@ -67,9 +103,11 @@ export default function ExpenseCard({ expenses }: { expenses: Expense[] }) {
       </div>
 
       <Card className="w-full">
+
         <CardHeader className="flex flex-row items-center justify-between pb-2">
+
           <div className="flex items-center">
-            {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -86,16 +124,30 @@ export default function ExpenseCard({ expenses }: { expenses: Expense[] }) {
             </svg>
             <span className="font-medium">Activity</span>
           </div>
-          {/* <span className="text-sm text-muted-foreground">February 2025</span> */}
+          <span className="text-sm text-muted-foreground">{ today }</span>
         </CardHeader>
 
-          <CardContent className="pb-2">
+          <CardContent className="flex flex-row items-center justify-between pb-2">
 
             <span className=" text-lg font-semibold flex items-center gap-2 text-gray-400">
-              <h3 className=" text-red-500">Ksh { totalAmount }</h3>
+              <h3 className=" text-red-500">Ksh { todaysTotal }</h3>
               ||
-              <h3 className=" text-[#0F0E47]">{ totalCost }</h3>
+              <h3 className=" text-[#0F0E47]">{ todaysCost }</h3>
             </span>
+
+            {yesterdaysTotal > 0 || todaysTotal > 0 ? (
+              <div className="flex items-center text-xs sm:text-sm">
+                {isIncrease ? (
+                  <ArrowUp className="h-3 w-3 sm:h-4 sm:w-4 text-red-500 mr-1" />
+                ) : (
+                  <ArrowDown className="h-3 w-3 sm:h-4 sm:w-4 text-green-500 mr-1" />
+                )}
+                <span className={isIncrease ? "text-red-500" : "text-green-500"}>
+                  {percentageDiff.toFixed(1)}% {isIncrease ? "increase" : "decrease"}
+                  <span className="hidden xs:inline"> from yesterday</span>
+                </span>
+              </div>
+            ) : null}
 
           </CardContent>
       </Card>
