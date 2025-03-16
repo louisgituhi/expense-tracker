@@ -142,7 +142,7 @@ function ExpenseTable({ expenses }: { expenses: Expense[] }) {
         case "shopping":
           return  "bg-pink-100 text-pink-500";
         case "airtime": 
-          return  "bg-[#FD5E53] text-[#E2544A]";
+          return  "bg-[#0BDA8F] text-[#023012]";
         case "haircut": 
           return  "bg-[#ED80E9] text-[#4F2B4E]";
         case "groceries": 
