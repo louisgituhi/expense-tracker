@@ -1,6 +1,6 @@
 "use client"
 
-import { Utensils, Home, Lightbulb, Car, Film, Heart, ShoppingBag, Plane, Shirt, FileX, PhoneCall, Scissors, Popcorn } from "lucide-react";
+import { Utensils, Home, Lightbulb, Car, Film, Heart, ShoppingBag, Shirt, FileX, PhoneCall, Scissors, Popcorn, MoveRight } from "lucide-react";
 import { i, type InstaQLEntity, init } from "@instantdb/react";
 // ID for app: expense-app
 const APP_ID = process.env.NEXT_PUBLIC_INSTANT_APP_ID as string;
@@ -106,13 +106,13 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
                       r="2"
                     />
                   <path d="M6 12h.01M18 12h.01"/>
-            </svg>
+                </svg>
 
                     </div>
 
                     <div>
                         <p className="font-medium">Money spent</p>
-                        <p className="text-xs text-muted-foreground">{ expenses.length } transactions</p>
+                        <p className="text-xs text-muted-foreground">{ expenses.length } </p>
                     </div>
 
                 </div>
@@ -164,14 +164,9 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
 
                   <div className="flex items-center">
                     <span className="font-medium mr-2">{formatCurrency(totalAmount)}</span>
-                    <svg 
-                      width="16" 
-                      height="16" 
-                      viewBox="0 0 24 24" 
-                      fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <title>svg</title>
-                      <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                    
+                    <MoveRight className=" w-4 h-4" />
+
                   </div>
                 </div>
               );

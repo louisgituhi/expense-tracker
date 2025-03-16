@@ -1,5 +1,6 @@
 "use client"
 
+import FloatingNavbar from "@/components/ui-components/floating-navbar";
 import ExpenseTable from "@/components/ui-components/expense-table";
 import ExpenditureCard from "@/components/ui-components/expenditure-card";
 
@@ -46,6 +47,8 @@ function App () {
         </div>
 
       </div>
+
+      <FloatingNavbar />
       
     </div>
   )

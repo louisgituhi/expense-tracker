@@ -7,9 +7,6 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 
 import { init, i, type InstaQLEntity } from "@instantdb/react";
 
-// ID for app: expense-app
-const APP_ID = process.env.NEXT_PUBLIC_INSTANT_APP_ID as string;
-
 // schema declaration 
 const schema = i.schema({
   entities: {
@@ -25,7 +22,6 @@ const schema = i.schema({
 
 type Expense = InstaQLEntity<typeof schema, "expenses">;
 
-const db = init({ appId: APP_ID, schema })
 
 const formatDate = (dateString: string | number) => {
   return new Date(dateString).toLocaleDateString("en-US", {

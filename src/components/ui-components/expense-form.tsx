@@ -44,6 +44,7 @@ type Expense = InstaQLEntity<typeof schema, "expenses">;
 
 const db = init({ appId: APP_ID, schema })
 
+
 function ExpenseForm({
   onSuccess 
 }: { 
@@ -84,6 +85,8 @@ function ExpenseForm({
     }
 
   }
+
+  
 
   return (
     <Card className="w-full max-w-md mx-auto">

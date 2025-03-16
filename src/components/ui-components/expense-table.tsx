@@ -1,14 +1,20 @@
+"use client"
+
+import { useState } from "react";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Table, TableCell, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-
-import EditDialogue from "./edit-dialogue";
+import { Select, SelectLabel, SelectTrigger, SelectContent, SelectValue, SelectItem } from "../ui/select";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetFooter } from "../ui/sheet";
 
 // icons 
 import { Trash2 } from "lucide-react";
 
 // db imports
-import { init, i, type InstaQLEntity } from "@instantdb/react";
+import { init, i, type InstaQLEntity, id } from "@instantdb/react";
+import { Edit } from "lucide-react";
 
 // ID for app: expense-app
 const APP_ID = process.env.NEXT_PUBLIC_INSTANT_APP_ID as string;
@@ -32,10 +38,71 @@ const db = init({ appId: APP_ID, schema })
 
 function ExpenseTable({ expenses }: { expenses: Expense[] }) {
 
+  const [isEditSheetOpen, setIsEditSheetOpen] = useState(false)
+  const [currentExpense, setCurrentExpense] = useState<Expense | null>(null)
+  const [formData, setFormData] = useState({
+    trx_amount: 0,
+    trx_cost: 0,
+    category: "",
+    payment_method: "",
+    paid_on: new Date().getTime(),
+  })
+
     function deleteExpense(expense: Expense) {
       db.transact(
         db.tx.expenses[expense.id].delete()
       );
+    }
+
+    function openEditSheet(expense: Expense) {
+      setCurrentExpense(expense)
+      setFormData({
+        trx_amount: expense.trx_amount,
+        trx_cost: expense.trx_cost,
+        category: expense.category,
+        payment_method: expense.payment_method,
+        paid_on: expense.paid_on,
+      })
+      setIsEditSheetOpen(true)
+    }
+  
+    function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+      const { name, value } = e.target
+      setFormData((prev) => ({
+        ...prev,
+        [name]: name === "trx_amount" || name === "trx_cost" ? Number.parseFloat(value) : value,
+      }))
+    }
+  
+    function handleSelectChange(name: string, value: string) {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }))
+    }
+  
+    function handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
+      const date = new Date(e.target.value).getTime()
+      setFormData((prev) => ({
+        ...prev,
+        paid_on: date,
+      }))
+    }
+  
+    function updateExpense() {
+      if (!currentExpense) return
+  
+      db.transact(
+        db.tx.expenses[currentExpense.id].update({
+          trx_amount: formData.trx_amount,
+          trx_cost: formData.trx_cost,
+          category: formData.category,
+          payment_method: formData.payment_method,
+          paid_on: formData.paid_on,
+        }),
+      )
+  
+      setIsEditSheetOpen(false)
     }
   
     // function get method styling
@@ -103,6 +170,12 @@ function ExpenseTable({ expenses }: { expenses: Expense[] }) {
         day: "numeric",
       })
     }
+
+    // Format date for input
+  const formatDateForInput = (timestamp: number) => {
+    const date = new Date(timestamp)
+    return date.toISOString().split("T")[0]
+  }
   
     return (
       <div className="flex items-center justify-between py-3">
@@ -144,9 +217,17 @@ function ExpenseTable({ expenses }: { expenses: Expense[] }) {
                             <Trash2 className="h-4 w-4" />
                             <span className="sr-only">Delete</span>
                           </Button>
-  
-                          <EditDialogue expenses={[]} />
-  
+
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 hover:bg-blue-200 hover:text-blue-500 hover:border-blue-500"
+                            onClick={() => openEditSheet(expense)}
+                          >
+                            <Edit className="h-4 w-4" />
+                            <span className="sr-only">Edit</span>
+                          </Button>
+                      
                         </div>
   
                       </TableCell>
@@ -169,6 +250,105 @@ function ExpenseTable({ expenses }: { expenses: Expense[] }) {
               </Table>
           </CardContent>
         </Card>
+        {/* Edit Expense Sheet */}
+      <Sheet open={isEditSheetOpen} onOpenChange={setIsEditSheetOpen}>
+        <SheetContent className="sm:max-w-md">
+          <SheetHeader>
+            <SheetTitle>Edit Expense</SheetTitle>
+            <SheetDescription>Make changes to your expense here. Click save when you're done.</SheetDescription>
+          </SheetHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="trx_amount" className="text-right">
+                Amount
+              </Label>
+              <Input
+                id="trx_amount"
+                name="trx_amount"
+                type="number"
+                value={formData.trx_amount}
+                onChange={handleInputChange}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="trx_cost" className="text-right">
+                Cost
+              </Label>
+              <Input
+                id="trx_cost"
+                name="trx_cost"
+                type="number"
+                value={formData.trx_cost}
+                onChange={handleInputChange}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="category" className="text-right">
+                Category
+              </Label>
+              <Select value={formData.category} onValueChange={(value) => handleSelectChange("category", value)}>
+                <SelectTrigger className="col-span-3">
+                  <SelectValue placeholder="Select category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="food">Food</SelectItem>
+                  <SelectItem value="housing">Housing</SelectItem>
+                  <SelectItem value="utilities">Utilities</SelectItem>
+                  <SelectItem value="transport">Transport</SelectItem>
+                  <SelectItem value="entertainment">Entertainment</SelectItem>
+                  <SelectItem value="healthcare">Healthcare</SelectItem>
+                  <SelectItem value="shopping">Shopping</SelectItem>
+                  <SelectItem value="airtime">Airtime</SelectItem>
+                  <SelectItem value="haircut">Haircut</SelectItem>
+                  <SelectItem value="groceries">Groceries</SelectItem>
+                  <SelectItem value="clothing">Clothing</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="payment_method" className="text-right">
+                Method
+              </Label>
+              <Select
+                value={formData.payment_method}
+                onValueChange={(value) => handleSelectChange("payment_method", value)}
+              >
+                <SelectTrigger className="col-span-3">
+                  <SelectValue placeholder="Select payment method" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="mpesa">MPesa</SelectItem>
+                  <SelectItem value="cheque">Cheque</SelectItem>
+                  <SelectItem value="debit">Debit</SelectItem>
+                  <SelectItem value="cash">Cash</SelectItem>
+                  <SelectItem value="credit">Credit</SelectItem>
+                  <SelectItem value="bank_app">Bank App</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="paid_on" className="text-right">
+                Date
+              </Label>
+              <Input
+                id="paid_on"
+                name="paid_on"
+                type="date"
+                value={formatDateForInput(formData.paid_on)}
+                onChange={handleDateChange}
+                className="col-span-3"
+              />
+            </div>
+          </div>
+          <SheetFooter>
+            <Button onClick={updateExpense}>Save changes</Button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
       </div>
     )
   }

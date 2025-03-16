@@ -54,8 +54,8 @@ export default function NavigationTab({ expenses }: { expenses: Expense[] } ) {
                 </TabsContent>
 
                 <TabsContent value="expense-chart" className="mt-4">
-                    <ExpenseChart expenses={ expenses } />
-                    {/* <ExpenseTable expenses={ expenses } /> */}
+                    {/* <ExpenseChart expenses={ expenses } /> */}
+                    <ExpenseTable expenses={ expenses } />
                 </TabsContent>
 
         </Tabs>
