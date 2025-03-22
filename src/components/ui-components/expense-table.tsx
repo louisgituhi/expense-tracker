@@ -202,6 +202,7 @@ function ExpenseTable({ expenses }: { expenses: Expense[] }) {
                 <TableBody className=" text-gray-500 text-xs">
                   { expenses
                     .sort((a,b) => new Date(b.paid_on).getTime() - new Date(a.paid_on).getTime())
+                    .slice(0, 10)
                     .map((expense) => (
                     <TableRow key={expense.id} className="group relative">
                       <TableCell className="border border-gray-200 w-24">
