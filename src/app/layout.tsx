@@ -24,7 +24,7 @@ export default function RootLayout({
         className={ ` ${jetBrainsMono.className} antialiased` }
       >
         {children}
-        <FloatingNavbar />
+        {/* <FloatingNavbar /> */}
       </body>
     </html>
   );
