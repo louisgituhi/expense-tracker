@@ -83,30 +83,30 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
 
                     <div className="p-2 bg-red-100 text-red-600 rounded-full">
 
-                    <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      width="24" 
-                      height="24" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="#FF355E" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      className="lucide lucide-banknote">
-                    <rect 
-                      width="20" 
-                      height="12" 
-                      x="2" y="6" rx="2"
-                    />
-                    <title>svg</title>
-                    <circle 
-                      cx="12" 
-                      cy="12" 
-                      r="2"
-                    />
-                  <path d="M6 12h.01M18 12h.01"/>
-                </svg>
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="#FF355E" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        className="lucide lucide-banknote">
+                        <rect 
+                          width="20" 
+                          height="12" 
+                          x="2" y="6" rx="2"
+                        />
+                        <title>svg</title>
+                        <circle 
+                          cx="12" 
+                          cy="12" 
+                          r="2"
+                        />
+                        <path d="M6 12h.01M18 12h.01"/>
+                      </svg>
 
                     </div>
 
@@ -120,6 +120,64 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
                 <div className="flex items-center">
 
                     <span className="font-medium mr-2">{formatCurrency(expenses.reduce((sum, expense) => sum + expense.trx_amount, 0))}</span>
+
+                        <svg 
+                            width="16" 
+                            height="16" 
+                            viewBox="0 0 24 24" 
+                            fill="none" 
+                            xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9 18L15 12L9 6"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <title>svg</title>
+                        </svg>
+
+              </div>
+
+            </div>
+
+            <div className="flex items-center justify-between p-3 rounded-lg border">
+
+                <div className="flex items-center gap-3">
+
+                    <div className="p-2 bg-[#CCCCFF] text-[#5C5C99] rounded-full">
+
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      width="24" 
+                      height="24" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="#c612de" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      className="lucide lucide-scale-icon lucide-scale">
+                        <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+                        <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+                        <path d="M7 21h10"/>
+                        <path d="M12 3v18"/>
+                        <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>\
+                        <title>scale ion</title>
+                    </svg>
+
+                    </div>
+
+                    <div>
+                        <p className="font-medium">Transactions cost</p>
+                        <p className="text-xs text-muted-foreground">{ expenses.length } </p>
+                    </div>
+
+                </div>
+
+                <div className="flex items-center">
+
+                    <span className="font-medium mr-2">{formatCurrency(expenses.reduce((sum, expense) => sum + expense.trx_cost, 0))}</span>
 
                         <svg 
                             width="16" 
