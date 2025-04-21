@@ -2,8 +2,14 @@
 
 import { Utensils, Home, Lightbulb, Car, Film, Heart, ShoppingBag, Shirt, FileX, PhoneCall, Scissors, Popcorn, MoveRight } from "lucide-react";
 import { i, type InstaQLEntity, init } from "@instantdb/react";
+import { JetBrains_Mono } from "next/font/google";
 // ID for app: expense-app
 const APP_ID = process.env.NEXT_PUBLIC_INSTANT_APP_ID as string;
+
+export const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+});
 
 const schema = i.schema({
   entities: {
@@ -112,14 +118,14 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
 
                     <div>
                         <p className="font-medium">Money spent</p>
-                        <p className="text-xs text-muted-foreground">{ expenses.length } </p>
+                        <p className="text-sm text-muted-foreground font-amarillo">{ expenses.length } </p>
                     </div>
 
                 </div>
 
                 <div className="flex items-center">
 
-                    <span className="font-medium mr-2">{formatCurrency(expenses.reduce((sum, expense) => sum + expense.trx_amount, 0))}</span>
+                    <span className="font-medium mr-2 font-amarillo text-lg">{formatCurrency(expenses.reduce((sum, expense) => sum + expense.trx_amount, 0))}</span>
 
                         <svg 
                             width="16" 
@@ -170,14 +176,14 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
 
                     <div>
                         <p className="font-medium">Transactions cost</p>
-                        <p className="text-xs text-muted-foreground">{ expenses.length } </p>
+                        <p className="text-sm text-muted-foreground font-amarillo">{ expenses.length } </p>
                     </div>
 
                 </div>
 
                 <div className="flex items-center">
 
-                    <span className="font-medium mr-2">{formatCurrency(expenses.reduce((sum, expense) => sum + expense.trx_cost, 0))}</span>
+                    <span className="font-medium mr-2 font-amarillo text-lg">{formatCurrency(expenses.reduce((sum, expense) => sum + expense.trx_cost, 0))}</span>
 
                         <svg 
                             width="16" 
@@ -215,13 +221,13 @@ export default function ExpenditureList({ expenses }: { expenses: Expense[] }) {
 
                     <div>
                       <p className="font-medium">{category}</p>
-                      <p className="text-xs text-muted-foreground">{count} transactions</p>
+                      <p className="text-sm text-muted-foreground font-amarillo">{count} <span className={ ` ${jetBrainsMono.className} antialiased` }>transactions</span></p>
                     </div>
 
                   </div>
 
                   <div className="flex items-center">
-                    <span className="font-medium mr-2">{formatCurrency(totalAmount)}</span>
+                    <span className="font-medium mr-2 font-amarillo text-lg">{formatCurrency(totalAmount)}</span>
                     
                     <MoveRight className=" w-4 h-4" />
 

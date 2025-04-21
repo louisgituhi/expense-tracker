@@ -102,7 +102,7 @@ function ExpenseForm({
                   <FormControl>
                     <div className="relative">
                       <DollarSign className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
-                      <Input placeholder="0.00" className="pl-10" type="number" step="0.01" {...field} />
+                      <Input placeholder="0.00" className="pl-10 font-amarillo text-base" type="number" step="0.01" {...field} />
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -119,7 +119,7 @@ function ExpenseForm({
                   <FormControl>
                     <div className="relative">
                       <Receipt className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
-                      <Input placeholder="0.00" className="pl-10" type="number" step="0.01" {...field} />
+                      <Input placeholder="0.00" className="pl-10 font-amarillo text-base" type="number" step="0.01" {...field} />
                     </div>
                   </FormControl>
                   <FormMessage />

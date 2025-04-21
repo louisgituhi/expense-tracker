@@ -1,5 +1,4 @@
 "use client"
-
 import ExpenseTable from "@/components/ui-components/expense-table";
 import ExpenditureCard from "@/components/ui-components/expenditure-card";
 

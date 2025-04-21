@@ -131,7 +131,7 @@ export default function ExpenseCard({ expenses }: { expenses: Expense[] }) {
 
           <CardContent className="flex flex-row items-center justify-between pb-2">
 
-            <span className=" text-lg font-semibold flex items-center gap-2 text-gray-400">
+            <span className=" text-lg font-semibold flex items-center gap-2 text-gray-400 font-amarillo">
               <h3 className=" text-[#FF355E]">Ksh { todaysTotal }</h3>
               ||
               <h3 className=" text-[#0F0E47]">{ todaysCost }</h3>

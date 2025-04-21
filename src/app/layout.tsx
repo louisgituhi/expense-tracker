@@ -3,7 +3,7 @@ import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import FloatingNavbar from "@/components/ui-components/floating-navbar";
 
-const jetBrainsMono = JetBrains_Mono({
+export const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
