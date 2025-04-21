@@ -55,7 +55,7 @@ const getCategoryStyle = (category: string) => {
     case "shopping":
       return { style: "bg-pink-100 text-pink-500", icon: <ShoppingBag className="w-4 h-4" /> };
     case "airtime": 
-      return { style: "bg-[#FD7F5E] text-[#FC2011]", icon: <PhoneCall className="w-4 h-4" /> };
+      return { style: "bg-[#FFDBBB] text-[#FC2011]", icon: <PhoneCall className="w-4 h-4" /> };
     case "haircut": 
       return { style: "bg-[#ED80E9] text-[#4F2B4E]", icon: <Scissors className="w-4 h-4" /> };
     case "groceries": 
